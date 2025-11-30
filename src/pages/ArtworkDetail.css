@@ -1,0 +1,312 @@
+.artwork-detail-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.back-btn {
+  background: white;
+  border: 2px solid #667eea;
+  color: #667eea;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.back-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+.artwork-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  margin-bottom: 60px;
+}
+
+.artwork-image-section {
+  position: relative;
+}
+
+.detail-image {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  object-fit: contain;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.artwork-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.artwork-info-section h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.artist-info {
+  margin: -15px 0 0;
+}
+
+.artist-link {
+  font-size: 1.4rem;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.artist-link:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.artwork-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meta-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.meta-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.price-section {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.price-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.price-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.sold-badge {
+  background: #dc3545;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
+}
+
+.stock-info {
+  background: #28a745;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.sold-message {
+  background: #f8d7da;
+  border: 2px solid #f5c6cb;
+  color: #721c24;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.sold-message p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.description-section h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.description-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #666;
+}
+
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.quantity-section label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.quantity-input {
+  width: 80px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.quantity-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.action-buttons .btn {
+  flex: 1;
+}
+
+/* Related Section */
+.related-section {
+  margin-top: 60px;
+}
+
+.related-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.related-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.related-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.related-info {
+  padding: 20px;
+}
+
+.related-info h4 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.related-info p {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.related-price {
+  color: #764ba2;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.not-found {
+  text-align: center;
+  padding: 100px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.not-found h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.not-found p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 968px) {
+  .artwork-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px 20px;
+  }
+
+  .artwork-info-section h1 {
+    font-size: 2rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}

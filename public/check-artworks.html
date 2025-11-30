@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Artworks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    pre {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .info {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+      border-left: 4px solid #2196f3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Check Artworks in Storage</h1>
+    
+    <div class="info">
+      <strong>This tool shows all artworks stored in localStorage</strong>
+    </div>
+
+    <button onclick="checkArtworks()">Check Artist Artworks</button>
+    <button onclick="addTestArtwork()">Add Test Artwork</button>
+    <button onclick="clearArtworks()">Clear All Artworks</button>
+    <button onclick="window.location.href='/'">Back to Gallery</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function checkArtworks() {
+      const output = document.getElementById('output');
+      const artistArtworks = localStorage.getItem('artistArtworks');
+      const user = localStorage.getItem('user');
+      
+      let html = '<h3>Storage Contents:</h3>';
+      
+      if (user) {
+        const parsedUser = JSON.parse(user);
+        html += '<h4>Current User:</h4>';
+        html += '<pre>' + JSON.stringify(parsedUser, null, 2) + '</pre>';
+      }
+      
+      if (artistArtworks) {
+        const parsed = JSON.parse(artistArtworks);
+        html += '<h4>Artist Artworks (' + parsed.length + '):</h4>';
+        html += '<pre>' + JSON.stringify(parsed, null, 2) + '</pre>';
+      } else {
+        html += '<p style="color: red; font-weight: bold;">❌ No artworks found in localStorage!</p>';
+        html += '<p>This is why you don\'t see any artworks in "My Artworks" tab.</p>';
+        html += '<p>Click "Add Test Artwork" to add a sample artwork.</p>';
+      }
+      
+      output.innerHTML = html;
+    }
+
+    function addTestArtwork() {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const artistArtworks = JSON.parse(localStorage.getItem('artistArtworks') || '[]');
+      
+      const testArtwork = {
+        id: Date.now(),
+        title: 'Test Artwork',
+        artist: user.name || 'Test Artist',
+        artistEmail: user.email || 'artist@gallery.com',
+        artistId: user.id || user.email,
+        year: 2025,
+        medium: 'Digital Art',
+        price: 1000,
+        stock: 10,
+        soldCount: 0,
+        description: 'This is a test artwork added via debug tool',
+        imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80',
+        category: 'Contemporary',
+        views: 0,
+        likes: 0,
+        featured: false,
+        createdAt: new Date().toISOString()
+      };
+      
+      artistArtworks.push(testArtwork);
+      localStorage.setItem('artistArtworks', JSON.stringify(artistArtworks));
+      
+      alert('✅ Test artwork added! Now check "My Artworks" tab in Artist Dashboard.');
+      checkArtworks();
+    }
+
+    function clearArtworks() {
+      if (confirm('Are you sure you want to clear all artworks?')) {
+        localStorage.removeItem('artistArtworks');
+        alert('✅ All artworks cleared!');
+        checkArtworks();
+      }
+    }
+
+    // Auto-check on load
+    window.onload = checkArtworks;
+  </script>
+</body>
+</html>

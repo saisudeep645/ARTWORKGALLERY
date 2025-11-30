@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Database</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      width: 100%;
+    }
+    button:hover {
+      background: #5568d3;
+    }
+    .success {
+      background: #4caf50;
+      color: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+      display: none;
+    }
+    .info {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 15px 0;
+      border-left: 4px solid #2196f3;
+    }
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔄 Reset Art Gallery Database</h1>
+    
+    <div class="info">
+      <strong>This will reset all data and create default accounts:</strong>
+      <ul>
+        <li><strong>Admin:</strong> admin@gallery.com / admin123</li>
+        <li><strong>Artist:</strong> artist@gallery.com / artist123</li>
+        <li><strong>Curator:</strong> curator@gallery.com / curator123</li>
+      </ul>
+    </div>
+
+    <button onclick="resetDatabase()">Reset Database</button>
+    <button onclick="viewData()">View Current Data</button>
+    <button onclick="window.location.href='/'">Back to Gallery</button>
+
+    <div id="success" class="success"></div>
+    <div id="output" style="margin-top: 20px;"></div>
+  </div>
+
+  <script>
+    function resetDatabase() {
+      // Clear all localStorage
+      localStorage.clear();
+      
+      // Reinitialize with default accounts
+      const defaultAccounts = [
+        {
+          id: Date.now(),
+          email: 'admin@gallery.com',
+          password: 'admin123',
+          name: 'Admin User',
+          role: 'admin',
+          status: 'active',
+          profile: {
+            phone: '',
+            address: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            country: '',
+            bio: '',
+            avatar: '',
+            website: '',
+            instagram: '',
+            facebook: '',
+            twitter: '',
+            specialization: '',
+            birthYear: '',
+            nationality: '',
+            education: '',
+            exhibitions: [],
+            awards: [],
+            newsletter: false,
+            notifications: true,
+            language: 'en',
+            currency: 'USD'
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          lastLogin: null,
+          loginCount: 0,
+          emailVerified: true,
+          twoFactorEnabled: false,
+          stats: {
+            artworksCreated: 0,
+            artworksSold: 0,
+            totalRevenue: 0,
+            ordersPlaced: 0,
+            reviewsGiven: 0,
+            wishlistItems: 0
+          }
+        },
+        {
+          id: Date.now() + 1,
+          email: 'artist@gallery.com',
+          password: 'artist123',
+          name: 'Demo Artist',
+          role: 'artist',
+          status: 'active',
+          profile: {
+            phone: '',
+            address: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            country: '',
+            bio: 'Professional artist specializing in contemporary abstract art.',
+            avatar: '',
+            website: '',
+            instagram: '',
+            facebook: '',
+            twitter: '',
+            specialization: 'Contemporary Art',
+            birthYear: '',
+            nationality: '',
+            education: '',
+            exhibitions: [],
+            awards: [],
+            newsletter: false,
+            notifications: true,
+            language: 'en',
+            currency: 'USD'
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          lastLogin: null,
+          loginCount: 0,
+          emailVerified: true,
+          twoFactorEnabled: false,
+          stats: {
+            artworksCreated: 0,
+            artworksSold: 0,
+            totalRevenue: 0,
+            ordersPlaced: 0,
+            reviewsGiven: 0,
+            wishlistItems: 0
+          }
+        },
+        {
+          id: Date.now() + 2,
+          email: 'curator@gallery.com',
+          password: 'curator123',
+          name: 'Art Curator',
+          role: 'curator',
+          status: 'active',
+          profile: {
+            phone: '',
+            address: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            country: '',
+            bio: 'Professional art curator with 8+ years of experience in evaluating and curating contemporary artworks.',
+            avatar: '',
+            website: '',
+            instagram: '',
+            facebook: '',
+            twitter: '',
+            specialization: 'Modern & Contemporary Art',
+            birthYear: '',
+            nationality: '',
+            education: '',
+            exhibitions: [],
+            awards: [],
+            newsletter: false,
+            notifications: true,
+            language: 'en',
+            currency: 'USD'
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          lastLogin: null,
+          loginCount: 0,
+          emailVerified: true,
+          twoFactorEnabled: false,
+          stats: {
+            artworksCreated: 0,
+            artworksSold: 0,
+            totalRevenue: 0,
+            ordersPlaced: 0,
+            reviewsGiven: 0,
+            wishlistItems: 0
+          }
+        }
+      ];
+      
+      localStorage.setItem('gallery_accounts', JSON.stringify(defaultAccounts));
+      
+      const successMsg = document.getElementById('success');
+      successMsg.style.display = 'block';
+      successMsg.innerHTML = '✅ Database reset successfully! Default accounts created.';
+      
+      setTimeout(() => {
+        successMsg.style.display = 'none';
+      }, 3000);
+    }
+
+    function viewData() {
+      const output = document.getElementById('output');
+      const accounts = localStorage.getItem('gallery_accounts');
+      const user = localStorage.getItem('user');
+      
+      let html = '<h3>Current Data:</h3>';
+      
+      if (accounts) {
+        const parsed = JSON.parse(accounts);
+        html += '<h4>Accounts (' + parsed.length + '):</h4>';
+        html += '<pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; overflow-x: auto;">';
+        html += JSON.stringify(parsed, null, 2);
+        html += '</pre>';
+      } else {
+        html += '<p>No accounts found in database.</p>';
+      }
+      
+      if (user) {
+        const parsed = JSON.parse(user);
+        html += '<h4>Current User:</h4>';
+        html += '<pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; overflow-x: auto;">';
+        html += JSON.stringify(parsed, null, 2);
+        html += '</pre>';
+      } else {
+        html += '<p>No user currently logged in.</p>';
+      }
+      
+      output.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

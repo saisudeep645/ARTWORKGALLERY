@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Operations Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    .test-section {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .button-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    button.danger {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    button.success {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    .output {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .output pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .success-msg {
+      color: #28a745;
+      font-weight: bold;
+    }
+    .error-msg {
+      color: #dc3545;
+      font-weight: bold;
+    }
+    .info-msg {
+      color: #17a2b8;
+      font-weight: bold;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔧 CRUD Operations Test Suite</h1>
+
+    <!-- Statistics -->
+    <div class="test-section">
+      <h2>📊 Database Statistics</h2>
+      <div class="stat-grid" id="stats"></div>
+      <button onclick="updateStats()" class="success">🔄 Refresh Stats</button>
+    </div>
+
+    <!-- Account CRUD -->
+    <div class="test-section">
+      <h2>👤 Account CRUD Operations</h2>
+      <div class="button-group">
+        <button onclick="testCreateAccount()">➕ Create Account</button>
+        <button onclick="testReadAccounts()">📖 Read All Accounts</button>
+        <button onclick="testUpdateAccount()">✏️ Update Account</button>
+        <button onclick="testDeleteAccount()" class="danger">🗑️ Delete Account</button>
+        <button onclick="testFindByEmail()">🔍 Find by Email</button>
+        <button onclick="testGetByRole()">🎭 Get by Role</button>
+      </div>
+      <div class="output" id="accountOutput"></div>
+    </div>
+
+    <!-- Authentication -->
+    <div class="test-section">
+      <h2>🔐 Authentication Operations</h2>
+      <div class="button-group">
+        <button onclick="testRegister()">📝 Register New User</button>
+        <button onclick="testLogin()">🔓 Login User</button>
+        <button onclick="testGetCurrentUser()">👤 Get Current User</button>
+        <button onclick="testLogout()" class="danger">🚪 Logout</button>
+      </div>
+      <div class="output" id="authOutput"></div>
+    </div>
+
+    <!-- Profile Operations -->
+    <div class="test-section">
+      <h2>📋 Profile Operations</h2>
+      <div class="button-group">
+        <button onclick="testUpdateProfile()">✏️ Update Profile</button>
+        <button onclick="testUpdateStats()">📊 Update Stats</button>
+        <button onclick="testChangePassword()">🔑 Change Password</button>
+      </div>
+      <div class="output" id="profileOutput"></div>
+    </div>
+
+    <!-- Database Management -->
+    <div class="test-section">
+      <h2>🗄️ Database Management</h2>
+      <div class="button-group">
+        <button onclick="viewAllData()">👁️ View All Data</button>
+        <button onclick="resetDatabase()" class="danger">🔄 Reset Database</button>
+        <button onclick="clearAllData()" class="danger">🗑️ Clear All Data</button>
+        <button onclick="exportData()" class="success">💾 Export Data</button>
+      </div>
+      <div class="output" id="dbOutput"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import accountDB (simulated - in real app this would be imported)
+    // For testing, we'll access localStorage directly
+    
+    window.log = function(elementId, message, type = 'info') {
+      const output = document.getElementById(elementId);
+      const className = type === 'success' ? 'success-msg' : type === 'error' ? 'error-msg' : 'info-msg';
+      const timestamp = new Date().toLocaleTimeString();
+      output.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+      output.scrollTop = output.scrollHeight;
+    }
+
+    window.clearOutput = function(elementId) {
+      document.getElementById(elementId).innerHTML = '';
+    }
+
+    window.updateStats = function() {
+      const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      
+      const stats = {
+        totalAccounts: accounts.length,
+        admins: accounts.filter(a => a.role === 'admin').length,
+        artists: accounts.filter(a => a.role === 'artist').length,
+        curators: accounts.filter(a => a.role === 'curator').length,
+        users: accounts.filter(a => a.role === 'user').length,
+        loggedIn: user ? '✓' : '✗'
+      };
+
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card">
+          <div class="stat-number">${stats.totalAccounts}</div>
+          <div class="stat-label">Total Accounts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${stats.admins}</div>
+          <div class="stat-label">Admins</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${stats.artists}</div>
+          <div class="stat-label">Artists</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${stats.curators}</div>
+          <div class="stat-label">Curators</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${stats.users}</div>
+          <div class="stat-label">Visitors</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${stats.loggedIn}</div>
+          <div class="stat-label">Logged In</div>
+        </div>
+      `;
+    }
+
+    // Account CRUD Tests
+    window.testCreateAccount = function() {
+      clearOutput('accountOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        const newAccount = {
+          id: Date.now(),
+          name: 'Test User ' + Math.floor(Math.random() * 1000),
+          email: 'test' + Date.now() + '@example.com',
+          password: 'test123',
+          role: 'user',
+          status: 'active',
+          profile: {},
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        accounts.push(newAccount);
+        localStorage.setItem('gallery_accounts', JSON.stringify(accounts));
+        log('accountOutput', '✅ Account created successfully!', 'success');
+        log('accountOutput', JSON.stringify(newAccount, null, 2));
+        updateStats();
+      } catch (error) {
+        log('accountOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testReadAccounts = function() {
+      clearOutput('accountOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        log('accountOutput', `✅ Found ${accounts.length} accounts`, 'success');
+        log('accountOutput', JSON.stringify(accounts, null, 2));
+      } catch (error) {
+        log('accountOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testUpdateAccount = function() {
+      clearOutput('accountOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        if (accounts.length === 0) {
+          log('accountOutput', '❌ No accounts to update', 'error');
+          return;
+        }
+        accounts[0].name = 'Updated Name ' + Date.now();
+        accounts[0].updatedAt = new Date().toISOString();
+        localStorage.setItem('gallery_accounts', JSON.stringify(accounts));
+        log('accountOutput', '✅ Account updated successfully!', 'success');
+        log('accountOutput', JSON.stringify(accounts[0], null, 2));
+        updateStats();
+      } catch (error) {
+        log('accountOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testDeleteAccount = function() {
+      clearOutput('accountOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        if (accounts.length === 0) {
+          log('accountOutput', '❌ No accounts to delete', 'error');
+          return;
+        }
+        const deleted = accounts.pop();
+        localStorage.setItem('gallery_accounts', JSON.stringify(accounts));
+        log('accountOutput', '✅ Account deleted successfully!', 'success');
+        log('accountOutput', JSON.stringify(deleted, null, 2));
+        updateStats();
+      } catch (error) {
+        log('accountOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testFindByEmail = function() {
+      clearOutput('accountOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        const email = 'admin@gallery.com';
+        const found = accounts.find(a => a.email === email);
+        if (found) {
+          log('accountOutput', `✅ Found account for ${email}`, 'success');
+          log('accountOutput', JSON.stringify(found, null, 2));
+        } else {
+          log('accountOutput', `❌ No account found for ${email}`, 'error');
+        }
+      } catch (error) {
+        log('accountOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testGetByRole = function() {
+      clearOutput('accountOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        const role = 'curator';
+        const found = accounts.filter(a => a.role === role);
+        log('accountOutput', `✅ Found ${found.length} ${role}(s)`, 'success');
+        log('accountOutput', JSON.stringify(found, null, 2));
+      } catch (error) {
+        log('accountOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    // Authentication Tests
+    window.testRegister = function() {
+      clearOutput('authOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        const newUser = {
+          id: Date.now(),
+          name: 'New User ' + Math.floor(Math.random() * 1000),
+          email: 'newuser' + Date.now() + '@example.com',
+          password: 'password123',
+          role: 'user',
+          status: 'active',
+          profile: {},
+          createdAt: new Date().toISOString()
+        };
+        accounts.push(newUser);
+        localStorage.setItem('gallery_accounts', JSON.stringify(accounts));
+        localStorage.setItem('user', JSON.stringify({...newUser, password: undefined}));
+        log('authOutput', '✅ User registered and logged in!', 'success');
+        log('authOutput', JSON.stringify(newUser, null, 2));
+        updateStats();
+      } catch (error) {
+        log('authOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testLogin = function() {
+      clearOutput('authOutput');
+      try {
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        const email = 'curator@gallery.com';
+        const password = 'curator123';
+        const account = accounts.find(a => a.email === email && a.password === password);
+        if (account) {
+          localStorage.setItem('user', JSON.stringify({...account, password: undefined}));
+          log('authOutput', '✅ Login successful!', 'success');
+          log('authOutput', JSON.stringify(account, null, 2));
+          updateStats();
+        } else {
+          log('authOutput', '❌ Invalid credentials', 'error');
+        }
+      } catch (error) {
+        log('authOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testGetCurrentUser = function() {
+      clearOutput('authOutput');
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (user) {
+          log('authOutput', '✅ Current user found', 'success');
+          log('authOutput', JSON.stringify(user, null, 2));
+        } else {
+          log('authOutput', '❌ No user logged in', 'error');
+        }
+      } catch (error) {
+        log('authOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testLogout = function() {
+      clearOutput('authOutput');
+      try {
+        localStorage.removeItem('user');
+        log('authOutput', '✅ Logged out successfully!', 'success');
+        updateStats();
+      } catch (error) {
+        log('authOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    // Profile Tests
+    window.testUpdateProfile = function() {
+      clearOutput('profileOutput');
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) {
+          log('profileOutput', '❌ No user logged in', 'error');
+          return;
+        }
+        user.profile = {
+          ...user.profile,
+          bio: 'Updated bio at ' + new Date().toLocaleString(),
+          phone: '+1234567890'
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        log('profileOutput', '✅ Profile updated!', 'success');
+        log('profileOutput', JSON.stringify(user.profile, null, 2));
+      } catch (error) {
+        log('profileOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testUpdateStats = function() {
+      clearOutput('profileOutput');
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) {
+          log('profileOutput', '❌ No user logged in', 'error');
+          return;
+        }
+        user.stats = {
+          ...user.stats,
+          artworksCreated: (user.stats?.artworksCreated || 0) + 1
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        log('profileOutput', '✅ Stats updated!', 'success');
+        log('profileOutput', JSON.stringify(user.stats, null, 2));
+      } catch (error) {
+        log('profileOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.testChangePassword = function() {
+      clearOutput('profileOutput');
+      try {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!user) {
+          log('profileOutput', '❌ No user logged in', 'error');
+          return;
+        }
+        const accounts = JSON.parse(localStorage.getItem('gallery_accounts') || '[]');
+        const index = accounts.findIndex(a => a.id === user.id);
+        if (index !== -1) {
+          accounts[index].password = 'newpassword123';
+          localStorage.setItem('gallery_accounts', JSON.stringify(accounts));
+          log('profileOutput', '✅ Password changed!', 'success');
+        }
+      } catch (error) {
+        log('profileOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    // Database Management
+    window.viewAllData = function() {
+      clearOutput('dbOutput');
+      try {
+        const data = {
+          accounts: JSON.parse(localStorage.getItem('gallery_accounts') || '[]'),
+          currentUser: JSON.parse(localStorage.getItem('user') || 'null'),
+          artworks: JSON.parse(localStorage.getItem('artistArtworks') || '[]'),
+          cart: JSON.parse(localStorage.getItem('cart') || '[]'),
+          wishlist: JSON.parse(localStorage.getItem('wishlist') || '[]'),
+          orders: JSON.parse(localStorage.getItem('orders') || '[]')
+        };
+        log('dbOutput', '✅ All database data:', 'success');
+        log('dbOutput', JSON.stringify(data, null, 2));
+      } catch (error) {
+        log('dbOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.resetDatabase = function() {
+      if (!confirm('Reset database to default accounts?')) return;
+      clearOutput('dbOutput');
+      try {
+        const defaultAccounts = [
+          {
+            id: Date.now(),
+            email: 'admin@gallery.com',
+            password: 'admin123',
+            name: 'Admin User',
+            role: 'admin',
+            status: 'active',
+            profile: {},
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: Date.now() + 1,
+            email: 'artist@gallery.com',
+            password: 'artist123',
+            name: 'Demo Artist',
+            role: 'artist',
+            status: 'active',
+            profile: { specialization: 'Contemporary Art' },
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: Date.now() + 2,
+            email: 'curator@gallery.com',
+            password: 'curator123',
+            name: 'Art Curator',
+            role: 'curator',
+            status: 'active',
+            profile: { specialization: 'Modern & Contemporary Art', bio: 'Professional art curator with 8+ years of experience' },
+            createdAt: new Date().toISOString()
+          }
+        ];
+        localStorage.setItem('gallery_accounts', JSON.stringify(defaultAccounts));
+        log('dbOutput', '✅ Database reset to defaults!', 'success');
+        updateStats();
+      } catch (error) {
+        log('dbOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.clearAllData = function() {
+      if (!confirm('Clear ALL data? This cannot be undone!')) return;
+      clearOutput('dbOutput');
+      try {
+        localStorage.clear();
+        log('dbOutput', '✅ All data cleared!', 'success');
+        updateStats();
+      } catch (error) {
+        log('dbOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    window.exportData = function() {
+      clearOutput('dbOutput');
+      try {
+        const data = {
+          accounts: JSON.parse(localStorage.getItem('gallery_accounts') || '[]'),
+          currentUser: JSON.parse(localStorage.getItem('user') || 'null'),
+          exportDate: new Date().toISOString()
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'gallery-data-export.json';
+        a.click();
+        log('dbOutput', '✅ Data exported!', 'success');
+      } catch (error) {
+        log('dbOutput', '❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    // Initialize
+    updateStats();
+  </script>
+</body>
+</html>

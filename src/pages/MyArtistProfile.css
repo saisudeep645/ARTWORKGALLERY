@@ -1,0 +1,263 @@
+.my-artist-profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.access-denied {
+  text-align: center;
+  padding: 100px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  margin: 40px 0;
+}
+
+.access-denied h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.access-denied p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.profile-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+
+.profile-hero-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-avatar {
+  margin-bottom: 25px;
+}
+
+.avatar-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: white;
+  color: #667eea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 0 auto;
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.profile-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-email {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.profile-specialization {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 25px;
+}
+
+.profile-section {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  margin: 40px 0;
+}
+
+.profile-section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #667eea;
+}
+
+.profile-bio {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.empty-message {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.empty-message a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.empty-message a:hover {
+  text-decoration: underline;
+}
+
+.profile-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-link {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.profile-artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.profile-artwork-card {
+  background: #f8f9fa;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.profile-artwork-card:hover {
+  transform: translateY(-8px);
+}
+
+.profile-artwork-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.profile-artwork-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-artwork-card:hover img {
+  transform: scale(1.1);
+}
+
+.profile-artwork-info {
+  padding: 20px;
+}
+
+.profile-artwork-info h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.artwork-year,
+.artwork-medium {
+  color: #666;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.artwork-price {
+  color: #764ba2;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.empty-artworks {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-artworks p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .profile-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .avatar-circle {
+    width: 120px;
+    height: 120px;
+    font-size: 3rem;
+  }
+
+  .profile-section {
+    padding: 25px;
+  }
+
+  .profile-artworks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-links {
+    flex-direction: column;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

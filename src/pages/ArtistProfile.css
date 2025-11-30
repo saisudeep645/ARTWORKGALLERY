@@ -1,0 +1,270 @@
+.artist-profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.artist-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  color: white;
+}
+
+.artist-hero-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.artist-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-hero-info {
+  text-align: center;
+}
+
+.artist-hero-info h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-nationality {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.hero-years {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  font-style: italic;
+}
+
+.artist-details-section {
+  padding: 60px 0 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.detail-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.detail-card h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #667eea;
+}
+
+.short-bio {
+  font-size: 1.2rem;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.full-bio {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.9;
+}
+
+.specialization-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.specialization-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.spec-tag {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.artworks-section {
+  padding: 40px 0;
+}
+
+.artworks-section h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 35px;
+  margin-bottom: 40px;
+}
+
+.artwork-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.artwork-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.artwork-image {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.artwork-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.artwork-card:hover .artwork-image img {
+  transform: scale(1.1);
+}
+
+.artwork-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.artwork-card:hover .artwork-overlay {
+  opacity: 1;
+}
+
+.artwork-overlay span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 12px 25px;
+  border: 2px solid white;
+  border-radius: 25px;
+}
+
+.artwork-info {
+  padding: 25px;
+}
+
+.artwork-info h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.artwork-year {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.artwork-medium {
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.artwork-price {
+  color: #764ba2;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.no-artworks {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 40px;
+  background: white;
+  border-radius: 15px;
+}
+
+.back-to-artists {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.not-found {
+  text-align: center;
+  padding: 100px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  margin: 40px 0;
+}
+
+.not-found h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.not-found p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 968px) {
+  .artist-hero {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .artist-hero-info h1 {
+    font-size: 2.5rem;
+  }
+
+  .artist-details-section {
+    grid-template-columns: 1fr;
+  }
+
+  .artworks-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
